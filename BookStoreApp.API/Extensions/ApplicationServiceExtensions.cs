@@ -1,9 +1,18 @@
-﻿namespace BookStoreApp.API.Extensions
+﻿using BookStoreApp.API.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace BookStoreApp.API.Extensions
 {
     public static class ApplicationServiceExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
+            var connectionString = configuration.GetConnectionString("BookStoreDbConnection");
+            services.AddDbContext<BookStoreDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
