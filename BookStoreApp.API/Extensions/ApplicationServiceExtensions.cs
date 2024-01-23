@@ -1,4 +1,5 @@
-﻿using BookStoreApp.API.Data;
+﻿using BookStoreApp.API.Configurations;
+using BookStoreApp.API.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStoreApp.API.Extensions
@@ -12,6 +13,8 @@ namespace BookStoreApp.API.Extensions
             {
                 options.UseSqlServer(connectionString);
             });
+
+            services.AddAutoMapper(typeof(MapperConfig));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
